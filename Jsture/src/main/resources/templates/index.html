@@ -1,0 +1,58 @@
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<!--
+    jSignature 在网页上手写签名的插件(html5手写签名) 在IE7~IE8这种不支持HTML5的浏览器上，是利用Flash嵌入的方式实现的签名处理;
+    在支持的HTML5的浏览器上默认采用canvas标签处理签名，可以生成 PNG格式、SVG格式的签名图片。
+    非常适合在IPAD等移动客户端上实现手写签名的，该插件基于JQuery。
+    注意FlashCanvas 是有两个文件组成的，需要放在同一个文件夹下，不要单独存放，因为他们是协同工作的
+
+    首先在需要引入的文件中引入你的jQuery插件地址，然后再引入jSignature插件的存放位置
+    -->
+		<link rel="stylesheet" type="text/css" href="/static/framework/bootstrap/css/bootstrap.min.css" />
+		<script src="/static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--处理版本低于IE9的浏览器，支持IE7、IE8,使用Flash实现-->
+		<script src="/static/js/flashcanvas.js" type="text/javascript" charset="utf-8"></script>
+		<!--处理支持H5的浏览器,使用canvas,非压缩吧，去掉了其中的签字横线，可以使用jSignature.min.js 看看两者的区别-->
+		<script src="/static/js/jSignature.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/static/framework/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="/static/js/index.js">
+		</script>
+	</head>
+
+	<body>
+		<div class="">
+			<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#regDialog">签字</button>
+			<button class="btn btn-default" type="button" onclick="downloadRTF()">转乘Word下载</button>
+			<button class="btn btn-danger" type="button" onclick="downloadPng()">转乘Png下载</button>
+
+			<div id="image" style="margin: 20px"></div>
+			<div></div>
+			<img id="img">
+		</div>
+
+		<div class="modal fade" id="regDialog">
+			<div class="modal-dialog " style="width: 1000px">
+				<div class="modal-content ">
+					<div class="modal-header">
+						<button type="button" data-dismiss="modal" class="close">&times;</button>
+						<h4 class="modal-title">
+						<span class="glyphicon glyphicon-user">签名</span>
+					</h4>
+					</div>
+					<div class="modal-body ">
+						<div id="signature"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" onclick="outputImage()" data-dismiss="modal">确认</button>
+							<button type="button" class="btn btn-default" onclick="reset()">重置</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
