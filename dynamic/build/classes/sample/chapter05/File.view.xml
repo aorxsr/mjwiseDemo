@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="File" parent="file">
+      <PropertyDef name="id">
+        <Property name="dataType">Integer</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="path">
+        <Property></Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <DataSet id="dataSet">
+      <Property name="dataProvider">fileService#getAll</Property>
+      <Property name="dataType">[File]</Property>
+      <Property name="pageSize">5</Property>
+    </DataSet>
+    <ToolBar>
+      <DataPilot id="dataPoiltFile">
+        <Property name="dataSet">dataSet</Property>
+        <Property name="itemCodes">pages,pageSize,+,-,x,&lt;,></Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dataGridFile">
+      <ClientEvent name="onClick">view.get(&quot;#dialogEdit&quot;).show();&#xD;
+</ClientEvent>
+      <Property name="dataSet">dataSet</Property>
+      <Property name="readOnly">true</Property>
+      <DataColumn name="name">
+        <Property name="property">name</Property>
+      </DataColumn>
+      <DataColumn name="path">
+        <Property name="property">path</Property>
+      </DataColumn>
+    </DataGrid>
+    <UpdateAction id="updateSave">
+      <Property name="dataResolver">fileService#updateSave</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="successMessage">保存成功!</Property>
+      <UpdateItem>
+        <Property name="dataSet">dataSet</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <Dialog id="dialogEdit" layout="native">
+      <Property name="height">500</Property>
+      <Property name="width">700</Property>
+      <Buttons>
+        <Button id="buttonSave">
+          <Property name="caption">保存</Property>
+        </Button>
+        <Button id="buttonCencel">
+          <Property name="caption">取消</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm id="aotuFrom">
+          <Property name="cols">400,*,*</Property>
+          <Property name="dataSet">dataSet</Property>
+          <AutoFormElement>
+            <Property name="name">name</Property>
+            <Property name="property">name</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">path</Property>
+            <Property name="property">path</Property>
+            <Editor>
+              <Container layout="hbox">
+                <Button id="buttonUpload">
+                  <Property name="caption">上传照片</Property>
+                </Button>
+                <Image id="imagePhoto">
+                  <Property name="width">128</Property>
+                  <Property name="height">128</Property>
+                </Image>
+              </Container>
+            </Editor>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <UploadAction id="uploadactionFile">
+      <Property name="maxFileSize">1MB</Property>
+      <Filters/>
+    </UploadAction>
+  </View>
+</ViewConfig>

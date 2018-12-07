@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model/>
+  <View>
+    <DataSet id="dsProducts">
+      <Property name="dataType">[Product]</Property>
+      <Property name="dataProvider">simpleCRUD#query1</Property>
+      <Property name="pageSize">10</Property>
+    </DataSet>
+    <AutoForm>
+      <AutoFormElement id="autoFromProductName">
+        <Property name="label">ProductName</Property>
+        <Property name="name">autoFromProductName</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement id="autoFromAddress">
+        <Property name="name">autoFromAddress</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <DataPilot>
+        <Property name="dataSet">dsProducts</Property>
+        <Property name="itemCodes">pages,+,-,x</Property>
+      </DataPilot>
+      <ToolBarButton>
+        <Property name="caption">保存</Property>
+        <Property name="action">updateSave</Property>
+      </ToolBarButton>
+      <ToolBarButton id="btnQuery">
+        <ClientEvent name="onClick" signature="self,arg,dsProducts,autoFromProductName,autoFromAddress">var autoFromProductName=autoFromProductName.get(&quot;value&quot;);&#xD;
+var autoFromAddress=autoFromAddress.get(&quot;value&quot;);&#xD;
+dorado.MessageBox.alert(autoFromProductName+autoFromAddress);&#xD;
+dsProducts.set(&quot;parameter&quot;, {&#xD;
+	productName:autoFromProductName,&#xD;
+	address:autoFromAddress&#xD;
+}).flushAsync();&#xD;
+</ClientEvent>
+        <Property name="caption">查询</Property>
+      </ToolBarButton>
+    </ToolBar>
+    <DataGrid>
+      <Property name="dataSet">dsProducts</Property>
+    </DataGrid>
+    <UpdateAction id="updateSave">
+      <Property name="dataResolver">simpleCRUD#saveAll</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="successMessage">保存成功!</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsProducts</Property>
+      </UpdateItem>
+    </UpdateAction>
+  </View>
+</ViewConfig>

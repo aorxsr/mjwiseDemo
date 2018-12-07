@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model/>
+  <View>
+    <DataSet id="daProducts">
+      <Property name="dataType">[Product]</Property>
+      <Property name="dataProvider">simpleCRUD#getAll</Property>
+      <Property name="pageSize">5</Property>
+    </DataSet>
+    <DataGrid>
+      <Property name="dataSet">daProducts</Property>
+    </DataGrid>
+    <ToolBar>
+      <DataPilot>
+        <Property name="dataSet">daProducts</Property>
+        <Property name="itemCodes">+,-,x,pages,pageSize</Property>
+      </DataPilot>
+      <ToolBarButton>
+        <Property name="caption">保存</Property>
+        <Property name="action">updateSave</Property>
+      </ToolBarButton>
+    </ToolBar>
+    <UpdateAction id="updateSave">
+      <Property name="dataResolver">simpleCRUD#saveAll</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="successMessage">保存成功!</Property>
+      <UpdateItem>
+        <Property name="dataSet">daProducts</Property>
+      </UpdateItem>
+    </UpdateAction>
+  </View>
+</ViewConfig>

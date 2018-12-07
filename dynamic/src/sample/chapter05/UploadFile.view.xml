@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="File" parent="file">
+      <PropertyDef name="id">
+        <Property name="dataType">Integer</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="path">
+        <Property></Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Container layout="hbox">
+      <ClientEvent name="onReady">view.get(&quot;#dialog&quot;).show();&#xD;
+</ClientEvent>
+      <Dialog id="dialog">
+        <Property name="width">300</Property>
+        <Property name="height">300</Property>
+        <Buttons>
+          <Button id="buttonOk">
+            <Property name="caption">OK、</Property>
+          </Button>
+        </Buttons>
+        <Children>
+          <AutoForm id="aotoFromCon">
+            <Label>
+              <Property name="property">请输入文件名称：</Property>
+              <Property name="text">请输入文件名称：</Property>
+            </Label>
+            <TextEditor id="fileName"/>
+            <AutoFormElement id="autoFromName">
+              <Property name="name">autoFromName</Property>
+              <Property name="label">文件名</Property>
+              <Property name="labelSeparator">：</Property>
+              <Editor/>
+            </AutoFormElement>
+            <Button id="buttonDownload">
+              <Property name="caption">点击下载</Property>
+              <Property name="action">downloadAction</Property>
+            </Button>
+            <Button id="buttonUpload">
+              <Property name="caption">点击上传</Property>
+              <Property name="action">autoUploadAction</Property>
+            </Button>
+          </AutoForm>
+          <UploadAction id="autoUploadAction">
+            <ClientEvent name="onFileUploaded">dorado.MessageBox.alert(arg.returnValue);&#xD;
+</ClientEvent>
+            <Property name="fileResolver">myUploadProcessor#process1</Property>
+            <Property name="maxFileSize">10MB</Property>
+            <Filters/>
+          </UploadAction>
+          <DownloadAction id="downloadAction">
+            <ClientEvent name="beforeExecute" signature="self,arg,fileName,autoFromCon">var fileName = fileName.get(&quot;value&quot;);&#xD;
+self.set(&quot;parameter&quot;,{&#xD;
+	&quot;fileName&quot;:fileName&#xD;
+});&#xD;
+</ClientEvent>
+            <Property name="fileProvider">myUploadProcessor#download</Property>
+          </DownloadAction>
+        </Children>
+        <Tools/>
+      </Dialog>
+    </Container>
+  </View>
+</ViewConfig>

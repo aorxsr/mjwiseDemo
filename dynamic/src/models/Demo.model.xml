@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <DataType name="Product">
+    <Property name="matchType">com.bstek.dorado.sample.entity.Product</Property>
+    <PropertyDef name="id">
+      <Property name="dataType">Integer</Property>
+    </PropertyDef>
+    <PropertyDef name="productName">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="address">
+      <Property></Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="file">
+    <Property name="matchType">com.bstek.dorado.sample.entity.File</Property>
+    <PropertyDef name="id">
+      <Property name="dataType">Integer</Property>
+    </PropertyDef>
+    <PropertyDef name="name">
+      <Property/>
+    </PropertyDef>
+    <PropertyDef name="path">
+      <Property/>
+    </PropertyDef>
+  </DataType>
+</Model>
